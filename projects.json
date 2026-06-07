@@ -375,7 +375,7 @@
     "projectDesc": "Frontend clone inspired by Amazon layouts and shopping interfaces.",
     "techStack": ["clone", "javascript"],
     "difficulty": "intermediate",
-    "projectPath": "./public/Amazon_Clone/index.html"
+    "projectPath": "./public/New-AmazonClone/index.html"
   },
   {
     "projectNo": 43,
@@ -483,7 +483,7 @@
     "projectDesc": "Tracks expenses and income to monitor financial habits efficiently.",
     "techStack": ["todo", "javascript"],
     "difficulty": "intermediate",
-    "projectPath": "./public/Budget%20Tracker/index.html"
+    "projectPath": "./public/Budget_Tracker/index.html"
   },
   {
     "projectNo": 55,
@@ -1059,7 +1059,7 @@
     "projectDesc": "Interactive particle animation creating visually engaging effects.",
     "techStack": ["ui", "html", "css", "js", "canvas"],
     "difficulty": "intermediate",
-    "projectPath": "./public/Particle Wave Animation/index.html"
+    "projectPath": "./public/image-particle-engine/index.html"
   },
   {
     "projectNo": 119,
@@ -1068,7 +1068,7 @@
     "projectDesc": "Experimental environment featuring playful interactions and frontend concepts.",
     "techStack": ["ui", "game", "html", "css", "js"],
     "difficulty": "intermediate",
-    "projectPath": "./public/code-visualizer-playground/index.html"
+    "projectPath": "./public/code-playground/index.html"
   },
   {
     "projectNo": 120,
@@ -1593,12 +1593,12 @@
   },
   {
     "projectNo": 177,
-    "projectName": "Interview Prep Hub",
+    "projectName": "Focus Timer",
     "projectType": "Tool",
-    "projectDesc": "Centralized platform for interview preparation resources and practice tools.",
-    "techStack": ["tool", "javascript", "html", "css"],
-    "difficulty": "advanced",
-    "projectPath": "./public/InterviewSimulator/index.html"
+    "projectDesc": "A minimal Pomodoro-style productivity timer to boost focus with custom work and break intervals.",
+    "techStack": ["react", "typescript", "tailwindcss", "productivity", "timer"],
+    "difficulty": "intermediate",
+    "projectPath": "./public/focustimer/index.html"
   },
   {
     "projectNo": 178,
@@ -1748,7 +1748,7 @@
     "projectDesc": "A dynamic, choice-driven storytelling application where users shape their own narrative paths.",
     "techStack": ["ui", "html", "css", "javascript"],
     "difficulty": "intermediate",
-    "projectPath": "./public/story/main.html"
+    "projectPath": "./public/story/story.html"
   },
   {
     "projectNo": 193,
