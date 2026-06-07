@@ -2,8 +2,14 @@ const textInput = document.getElementById('text-input');
 const convertBtn = document.getElementById('convert-btn');
 const stopBtnText = document.getElementById('stop-btn-text');
 const stopBtnVoice = document.getElementById('stop-btn-voice');
-const langSelect = document.getElementById("language");
+const langSelect = document.getElementById('tts-language');
 const langSelectSTT = document.getElementById('language-stt');
+
+// Missing button references
+const copyBtn = document.getElementById('copy-btn');
+const downloadBtn = document.getElementById('download-btn');
+const clearOutputBtn = document.getElementById('clear-output');
+const themeToggle = document.getElementById('theme-toggle');
 
 let speechSynthesis = window.speechSynthesis;
 let speechSynthesisUtterance = new SpeechSynthesisUtterance();
@@ -25,50 +31,11 @@ convertBtn.addEventListener('click', () => {
 });
 
 /* =========================
-   TEXT → SPEECH
-========================= */
-
-convertBtn.addEventListener("click", () => {
-  const text = textInput.value.trim();
-
-  if (!text) {
-    alert("Please enter text first.");
-    return;
-  }
-
-  const utterance = new SpeechSynthesisUtterance(text);
-
-  // language
-  utterance.lang = ttsLanguage.value;
-
-  // voice selection
-  if (voices[voiceSelect.value]) {
-    utterance.voice = voices[voiceSelect.value];
-  }
-
-  synth.cancel(); // stop previous speech
-
-  synth.speak(utterance);
-
-  speakingStatus.textContent = "🔊 Speaking...";
-  convertBtn.disabled = true;
-  stopBtnText.disabled = false;
-
-  utterance.onend = () => {
-    speakingStatus.textContent = "✅ Finished";
-    convertBtn.disabled = false;
-    stopBtnText.disabled = true;
-  };
-});
-
-/* =========================
    STOP SPEECH
 ========================= */
 
 stopBtnText.addEventListener("click", () => {
-  synth.cancel();
-  speakingStatus.textContent = "⛔ Stopped";
-
+  speechSynthesis.cancel();
   convertBtn.disabled = false;
   stopBtnText.disabled = true;
 });
@@ -80,40 +47,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const output = document.getElementById('output');
     
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
     
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = langSelectSTT.value;
+    if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = langSelectSTT.value;
 
-    recognition.onresult = (event) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-            transcript += event.results[i][0].transcript;
-        }
-        output.value = transcript;
-    };
+        recognition.onresult = (event) => {
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                transcript += event.results[i][0].transcript;
+            }
+            output.value = transcript;
+        };
 
-    recognition.onerror = (event) => {
-        console.error('Speech recognition error', event.error);
-    };
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error', event.error);
+        };
 
-    startBtn.addEventListener('click', () => {
-    recognition.lang = langSelect.value; // dynamic language
-    recognition.start();
+        startBtn.addEventListener('click', () => {
+            recognition.lang = langSelect.value; // dynamic language
+            recognition.start();
+        });
 
-    stopBtnVoice.addEventListener('click', () => {
-    
-    recognition.stop();
-
-    listeningStatus.textContent = "⛔ Stopped";
-    startBtn.disabled = false;
-    stopBtnVoice.disabled = true;
-  });
-} else {
-  listeningStatus.textContent =
-    "❌ Speech Recognition not supported in this browser.";
-}
+        stopBtnVoice.addEventListener('click', () => {
+            recognition.stop();
+            listeningStatus.textContent = "⛔ Stopped";
+            startBtn.disabled = false;
+            stopBtnVoice.disabled = true;
+        });
+    } else {
+        listeningStatus.textContent =
+            "❌ Speech Recognition not supported in this browser.";
+    }
+});
 
 /* =========================
    COPY OUTPUT
